@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   if (savedColor) {
-    html.dataset.theme = savedColor;
+    html.dataset.colorTheme = savedColor;
   }
   
   // Theme toggle
-  themeToggle.addEventListener('click', () => {
+  themeToggle?.addEventListener('click', () => {
     const isDark = html.dataset.theme === 'dark';
     html.dataset.theme = isDark ? '' : 'dark';
     localStorage.setItem('theme', html.dataset.theme);
@@ -35,81 +35,69 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   function updateThemeIcon() {
-    const icon = themeToggle.querySelector('i');
-    icon.className = html.dataset.theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+    const icon = themeToggle?.querySelector('i');
+    if (icon) {
+      icon.className = html.dataset.theme === 'dark' 
+        ? 'fas fa-moon'
+        : 'fas fa-sun';
+    }
   }
-  
-  // Color theme switcher
+
+  // Color theme picker
   colorOptions.forEach(option => {
     option.addEventListener('click', () => {
       const theme = option.dataset.theme;
-      html.dataset.theme = theme;
+      html.dataset.colorTheme = theme;
       localStorage.setItem('colorTheme', theme);
     });
   });
-  
-  // Project search
+
+  // Project search functionality
+  const searchToggle = document.getElementById('searchToggle');
   const searchContainer = document.getElementById('projectSearch');
   const searchInput = document.getElementById('searchInput');
-  const projectCards = document.querySelectorAll('.project-card');
   const clearSearch = document.querySelector('.clear-search');
-  
-  function filterProjects(query) {
-    const searchTerm = query.toLowerCase();
-    projectCards.forEach(card => {
-      const title = card.querySelector('h3').textContent.toLowerCase();
-      const tags = Array.from(card.querySelectorAll('.project-tags span'))
-        .map(tag => tag.textContent.toLowerCase());
-      
-      const isVisible = title.includes(searchTerm) || 
-        tags.some(tag => tag.includes(searchTerm));
-      
-      card.style.display = isVisible ? '' : 'none';
-    });
-  }
-  
-  searchInput?.addEventListener('input', (e) => filterProjects(e.target.value));
+  const projectCards = document.querySelectorAll('.project-card');
+
+  searchToggle?.addEventListener('click', () => {
+    searchContainer?.classList.toggle('active');
+    searchInput?.focus();
+  });
+
   clearSearch?.addEventListener('click', () => {
-    searchInput.value = '';
-    filterProjects('');
+    if (searchInput) searchInput.value = '';
+    projectCards.forEach(card => card.style.display = 'block');
   });
-  
-  // Intersection Observer for animations
-  const observerCallback = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
+
+  searchInput?.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    
+    projectCards.forEach(card => {
+      const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+      const description = card.querySelector('p')?.textContent.toLowerCase() || '';
+      const tags = Array.from(card.querySelectorAll('.project-tags span'))
+        .map(tag => tag.textContent.toLowerCase())
+        .join(' ');
+      
+      const content = `${title} ${description} ${tags}`;
+      
+      card.style.display = content.includes(searchTerm) ? 'block' : 'none';
     });
-  };
-  
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-  
-  // Add animation classes to elements
-  document.querySelectorAll('section > *:not(h2)').forEach(element => {
-    element.classList.add('fade-up');
-    observer.observe(element);
   });
-  
-  // Mobile menu toggle
+
+  // Mobile navigation
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const navLinks = document.querySelector('.nav-links');
 
   mobileNavToggle?.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const isExpanded = navLinks.classList.contains('active');
-    mobileNavToggle.setAttribute('aria-expanded', isExpanded);
+    navLinks?.classList.toggle('active');
+    const isExpanded = navLinks?.classList.contains('active');
+    mobileNavToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
   });
 
   // Smooth scrolling for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
@@ -118,16 +106,40 @@ document.addEventListener('DOMContentLoaded', function() {
           block: 'start'
         });
         // Close mobile menu if open
-        navLinks.classList.remove('active');
+        navLinks?.classList.remove('active');
       }
     });
   });
+
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    root: null,
+    threshold: 0.1,
+    rootMargin: '0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target); // Only animate once
+      }
+    });
+  }, observerOptions);
+
+  // Observe all major sections and cards
+  document.querySelectorAll('section, .project-card, .education-card, .cert-item, .experience-card').forEach(
+    element => {
+      element.classList.add('animate-on-scroll');
+      observer.observe(element);
+    }
+  );
 
   // Contact form handling
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault(); // Prevent default form submission
+      e.preventDefault();
       
       const submitBtn = contactForm.querySelector('.submit-btn');
       const loadingSpinner = contactForm.querySelector('.loading-spinner');
@@ -148,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       for (const [name, value] of formData.entries()) {
         const input = contactForm.querySelector(`[name="${name}"]`);
-        const formGroup = input.closest('.form-group');
+        const formGroup = input?.closest('.form-group');
         
         if (!value.trim()) {
           isValid = false;
@@ -159,9 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
-      if (!isValid) {
-        return;
-      }
+      if (!isValid) return;
 
       // Show loading state
       if (submitBtn && loadingSpinner) {
@@ -179,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (response.ok) {
-          // Redirect to thank you page
           window.location.href = formData.get('_next') || 'thank-you.html';
         } else {
           throw new Error('Form submission failed');
@@ -196,48 +205,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const errorDiv = document.createElement('div');
         errorDiv.className = 'form-error-message';
         errorDiv.textContent = 'Sorry, there was an error sending your message. Please try again later.';
-        formContainer.insertBefore(errorDiv, contactForm);
+        formContainer?.insertBefore(errorDiv, contactForm);
       }
     });
   }
-
-  // Email validation helper
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  // Error display helper
-  function showError(formGroup, message) {
-    formGroup.classList.add('error');
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.textContent = message;
-    formGroup.appendChild(errorDiv);
-  }
-
-  // Scroll spy for navigation
-  let prevSection = '';
-  window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-links a');
-    
-    let current = prevSection;
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (scrollY >= (sectionTop - sectionHeight / 3)) {
-        current = section.getAttribute('id');
-      }
-    });
-
-    if (current !== prevSection) {
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href').slice(1) === current) {
-          item.classList.add('active');
-        }
-      });
-      prevSection = current;
-    }
-  });
 });
+
+// Helper functions
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function showError(formGroup, message) {
+  if (!formGroup) return;
+  formGroup.classList.add('error');
+  const errorDiv = document.createElement('div');
+  errorDiv.className = 'error-message';
+  errorDiv.textContent = message;
+  formGroup.appendChild(errorDiv);
+}

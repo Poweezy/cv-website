@@ -1,11 +1,17 @@
-{
-  "name": "Siphiwo Nsibande - Portfolio",
+{  "name": "Siphiwo Nsibande - Portfolio",
   "short_name": "Siphiwo CV",
   "description": "Professional portfolio of Siphiwo Nsibande - IT Systems & Network Technician",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "any",
   "background_color": "#ffffff",
   "theme_color": "#007bff",
+  "categories": ["portfolio", "professional", "technology"],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "id": "/",
   "icons": [
     {
       "src": "assets/icons/icon-192x192.png",
