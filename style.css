@@ -678,19 +678,28 @@ section h2 {
 }
 
 [data-theme="dark"] .cert-item {
+  background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--dark-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .cert-name {
   color: var(--dark-text);
+  font-weight: 600;
 }
 
 [data-theme="dark"] .cert-date {
   color: var(--dark-secondary-text);
 }
 
+[data-theme="dark"] .cert-item i {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
 [data-theme="dark"] .cert-item:hover {
   transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-color: var(--primary-color);
 }
