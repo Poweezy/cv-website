@@ -26,6 +26,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Handle system dark mode preference
+  if (window.matchMedia && !localStorage.getItem('theme')) {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.dataset.theme = prefersDark ? 'dark' : '';
+    if (prefersDark) localStorage.setItem('theme', 'dark');
+  }
+
   // Theme management
   const themeToggle = document.getElementById('themeToggle');
   const colorOptions = document.querySelectorAll('.color-option');
@@ -69,37 +76,18 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('colorTheme', theme);
     });
   });
-
-  // Project search functionality
-  const searchToggle = document.getElementById('searchToggle');
-  const searchContainer = document.getElementById('projectSearch');
-  const searchInput = document.getElementById('searchInput');
-  const clearSearch = document.querySelector('.clear-search');
-  const projectCards = document.querySelectorAll('.project-card');
-
-  searchToggle?.addEventListener('click', () => {
-    searchContainer?.classList.toggle('active');
-    searchInput?.focus();
-  });
-
-  clearSearch?.addEventListener('click', () => {
-    if (searchInput) searchInput.value = '';
-    projectCards.forEach(card => card.style.display = 'block');
-  });
-
-  searchInput?.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
+  // Color theme picker
+  colorOptions.forEach(option => {
+    const theme = option.dataset.theme;
+    if (theme === (savedColor || 'blue')) {
+      option.classList.add('active');
+    }
     
-    projectCards.forEach(card => {
-      const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-      const description = card.querySelector('p')?.textContent.toLowerCase() || '';
-      const tags = Array.from(card.querySelectorAll('.project-tags span'))
-        .map(tag => tag.textContent.toLowerCase())
-        .join(' ');
-      
-      const content = `${title} ${description} ${tags}`;
-      
-      card.style.display = content.includes(searchTerm) ? 'block' : 'none';
+    option.addEventListener('click', () => {
+      colorOptions.forEach(opt => opt.classList.remove('active'));
+      option.classList.add('active');
+      html.dataset.colorTheme = theme;
+      localStorage.setItem('colorTheme', theme);
     });
   });
 

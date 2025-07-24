@@ -66,33 +66,34 @@
       <a href="assets/Siphiwo_Resume.pdf" download class="cta-button"><i class="fas fa-download"></i> Download CV</a>
     </div>
     <div class="nav-controls">
-      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">
-        <i class="fas fa-sun"></i>
-      </button>
-      <div class="theme-picker">
-        <button class="color-option" data-theme="blue" aria-label="Blue theme"></button>
-        <button class="color-option" data-theme="green" aria-label="Green theme"></button>
-        <button class="color-option" data-theme="purple" aria-label="Purple theme"></button>
-        <button class="color-option" data-theme="teal" aria-label="Teal theme"></button>
+      <div class="theme-controls">
+        <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">
+          <i class="fas fa-sun"></i>
+          <span class="tooltip">Toggle Dark Mode</span>
+        </button>
+        <div class="theme-picker">
+          <span class="theme-label">Theme Colors:</span>
+          <div class="color-options">
+            <button class="color-option active" data-theme="blue" aria-label="Blue theme">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="color-option" data-theme="green" aria-label="Green theme">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="color-option" data-theme="purple" aria-label="Purple theme">
+              <i class="fas fa-check"></i>
+            </button>
+            <button class="color-option" data-theme="teal" aria-label="Teal theme">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <button id="searchToggle" class="icon-button" aria-label="Toggle project search">
-        <i class="fas fa-search"></i>
-      </button>
       <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
       </button>
     </div>
   </nav>
-
-  <!-- Project Search -->
-  <div id="projectSearch" class="search-container">
-    <div class="search-wrapper">
-      <input type="text" id="searchInput" placeholder="Search projects by name or technology..." />
-      <button class="clear-search" aria-label="Clear search">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-  </div>
 
   <section id="home" class="hero">
     <img src="assets/profile-pic.jpg" alt="Siphiwo Nsibande" loading="lazy" />
