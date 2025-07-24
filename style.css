@@ -669,11 +669,30 @@ section h2 {
 [data-theme="dark"] .experience-card,
 [data-theme="dark"] .education-card,
 [data-theme="dark"] .project-card,
+[data-theme="dark"] .cert-item,
 [data-theme="dark"] .contact-form,
 [data-theme="dark"] .contact-info,
 [data-theme="dark"] .thank-you-content {
   background-color: var(--dark-card-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .cert-item {
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .cert-name {
+  color: var(--dark-text);
+}
+
+[data-theme="dark"] .cert-date {
+  color: var(--dark-secondary-text);
+}
+
+[data-theme="dark"] .cert-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-color);
 }
 
 [data-theme="dark"] .form-group input,
