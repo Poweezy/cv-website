@@ -106,36 +106,13 @@ nav {
   font-size: 1.2rem;
   color: var(--text-color);
   cursor: pointer;
-  position: relative;
   border-radius: var(--border-radius);
   transition: var(--transition);
+  margin: 0 0.5rem;
 }
 
 .icon-button:hover {
-  background-color: var(--hover-color);
-  color: white;
-}
-
-.icon-button .tooltip {
-  position: absolute;
-  bottom: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  padding: 0.5rem;
-  border-radius: var(--border-radius);
-  font-size: 0.8rem;
-  white-space: nowrap;
-  box-shadow: var(--box-shadow);
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transition);
-}
-
-.icon-button:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
+  color: var(--primary-color);
 }
 
 
