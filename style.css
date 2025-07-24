@@ -1,6 +1,5 @@
 /* Theme Colors */
 :root {
-  /* Blue Theme (Default) */
   --primary-color: #007bff;
   --secondary-color: #6c757d;
   --background-color: #f9f9f9;
@@ -23,22 +22,6 @@
   --dark-secondary-text: #a0a0a0;
   --dark-border: #2d2d2d;
   --dark-hover: #2d2d2d;
-}
-
-/* Theme Variations */
-[data-theme="green"] {
-  --primary-color: #28a745;
-  --hover-color: #218838;
-}
-
-[data-theme="purple"] {
-  --primary-color: #6f42c1;
-  --hover-color: #533192;
-}
-
-[data-theme="teal"] {
-  --primary-color: #20c997;
-  --hover-color: #199d76;
 }
 
 /* Dark Mode */
@@ -155,62 +138,7 @@ nav {
   visibility: visible;
 }
 
-/* Theme Picker */
-.theme-picker {
-  position: relative;
-  padding: 0.5rem;
-}
 
-.theme-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-  font-size: 0.9rem;
-}
-
-.color-options {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.color-option {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid var(--border-color);
-  cursor: pointer;
-  position: relative;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.color-option i {
-  color: white;
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.color-option.active i {
-  opacity: 1;
-}
-
-.color-option[data-theme="blue"] {
-  background-color: #007bff;
-}
-
-.color-option[data-theme="green"] {
-  background-color: #28a745;
-}
-
-.color-option[data-theme="purple"] {
-  background-color: #6f42c1;
-}
-
-.color-option[data-theme="teal"] {
-  background-color: #20c997;
-}
 
 /* Hero Section */
 .hero {

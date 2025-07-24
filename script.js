@@ -32,23 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.documentElement.dataset.theme = prefersDark ? 'dark' : '';
     if (prefersDark) localStorage.setItem('theme', 'dark');
   }
-
   // Theme management
   const themeToggle = document.getElementById('themeToggle');
-  const colorOptions = document.querySelectorAll('.color-option');
   const html = document.documentElement;
   
   // Load saved preferences
   const savedTheme = localStorage.getItem('theme');
-  const savedColor = localStorage.getItem('colorTheme');
   
   if (savedTheme) {
     html.dataset.theme = savedTheme;
     updateThemeIcon();
-  }
-  
-  if (savedColor) {
-    html.dataset.colorTheme = savedColor;
   }
   
   // Theme toggle
@@ -67,29 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
         : 'fas fa-sun';
     }
   }
-
-  // Color theme picker
-  colorOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const theme = option.dataset.theme;
-      html.dataset.colorTheme = theme;
-      localStorage.setItem('colorTheme', theme);
-    });
-  });
-  // Color theme picker
-  colorOptions.forEach(option => {
-    const theme = option.dataset.theme;
-    if (theme === (savedColor || 'blue')) {
-      option.classList.add('active');
-    }
-    
-    option.addEventListener('click', () => {
-      colorOptions.forEach(opt => opt.classList.remove('active'));
-      option.classList.add('active');
-      html.dataset.colorTheme = theme;
-      localStorage.setItem('colorTheme', theme);
-    });
-  });
 
   // Mobile navigation
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
