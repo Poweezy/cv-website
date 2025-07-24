@@ -13,15 +13,14 @@
   --header-bg: #ffffff;
   --nav-text: #333333;
   --nav-hover: #007bff;
-  
-  /* Dark Mode Colors */
-  --dark-bg: #121212;
-  --dark-card-bg: #1e1e1e;
-  --dark-header-bg: #1e1e1e;
+    /* Dark Mode Colors */
+  --dark-bg: #1a1a1a;
+  --dark-card-bg: #242424;
+  --dark-header-bg: #242424;
   --dark-text: #ffffff;
-  --dark-secondary-text: #a0a0a0;
-  --dark-border: #2d2d2d;
-  --dark-hover: #2d2d2d;
+  --dark-secondary-text: #cccccc;
+  --dark-border: #404040;
+  --dark-hover: #404040;
 }
 
 /* Dark Mode */
@@ -634,6 +633,7 @@ section h2 {
   --border-color: var(--dark-border);
   --header-bg: var(--dark-header-bg);
   --secondary-color: var(--dark-secondary-text);
+  --hover-color: var(--primary-color);
 }
 
 [data-theme="dark"] nav {
@@ -641,22 +641,56 @@ section h2 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #242424 0%, #1a1a1a 100%);
+}
+
+[data-theme="dark"] .hero img {
+  border-color: var(--dark-border);
+}
+
+[data-theme="dark"] .skills span {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--dark-text);
+  border: 1px solid var(--dark-border);
+}
+
+[data-theme="dark"] .skills span i {
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] .project-tags span {
+  background-color: var(--dark-card-bg);
+  color: var(--dark-text);
+}
+
 [data-theme="dark"] .card,
 [data-theme="dark"] .skill-category,
 [data-theme="dark"] .experience-card,
 [data-theme="dark"] .education-card,
 [data-theme="dark"] .project-card,
-[data-theme="dark"] .contact-form {
+[data-theme="dark"] .contact-form,
+[data-theme="dark"] .contact-info,
+[data-theme="dark"] .thank-you-content {
   background-color: var(--dark-card-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-[data-theme="dark"] .theme-picker {
-  background-color: var(--dark-card-bg);
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group textarea {
+  background-color: var(--dark-bg);
+  border-color: var(--dark-border);
+  color: var(--dark-text);
 }
 
-[data-theme="dark"] .color-option {
-  border-color: var(--dark-border);
+[data-theme="dark"] .loading-spinner {
+  border-color: #404040;
+  border-top-color: var(--primary-color);
+}
+
+[data-theme="dark"] .btn:hover,
+[data-theme="dark"] .cta-button:hover {
+  background-color: #1a75ff;
 }
 
 /* Animation Classes */
