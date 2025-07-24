@@ -1,4 +1,102 @@
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => console.log('ServiceWorker registered'))
+      .catch(err => console.log('ServiceWorker registration failed: ', err));
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  // Theme management
+  const themeToggle = document.getElementById('themeToggle');
+  const colorOptions = document.querySelectorAll('.color-option');
+  const html = document.documentElement;
+  
+  // Load saved preferences
+  const savedTheme = localStorage.getItem('theme');
+  const savedColor = localStorage.getItem('colorTheme');
+  
+  if (savedTheme) {
+    html.dataset.theme = savedTheme;
+    updateThemeIcon();
+  }
+  
+  if (savedColor) {
+    html.dataset.theme = savedColor;
+  }
+  
+  // Theme toggle
+  themeToggle.addEventListener('click', () => {
+    const isDark = html.dataset.theme === 'dark';
+    html.dataset.theme = isDark ? '' : 'dark';
+    localStorage.setItem('theme', html.dataset.theme);
+    updateThemeIcon();
+  });
+  
+  function updateThemeIcon() {
+    const icon = themeToggle.querySelector('i');
+    icon.className = html.dataset.theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
+  }
+  
+  // Color theme switcher
+  colorOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const theme = option.dataset.theme;
+      html.dataset.theme = theme;
+      localStorage.setItem('colorTheme', theme);
+    });
+  });
+  
+  // Project search
+  const searchContainer = document.getElementById('projectSearch');
+  const searchInput = document.getElementById('searchInput');
+  const projectCards = document.querySelectorAll('.project-card');
+  const clearSearch = document.querySelector('.clear-search');
+  
+  function filterProjects(query) {
+    const searchTerm = query.toLowerCase();
+    projectCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      const tags = Array.from(card.querySelectorAll('.project-tags span'))
+        .map(tag => tag.textContent.toLowerCase());
+      
+      const isVisible = title.includes(searchTerm) || 
+        tags.some(tag => tag.includes(searchTerm));
+      
+      card.style.display = isVisible ? '' : 'none';
+    });
+  }
+  
+  searchInput?.addEventListener('input', (e) => filterProjects(e.target.value));
+  clearSearch?.addEventListener('click', () => {
+    searchInput.value = '';
+    filterProjects('');
+  });
+  
+  // Intersection Observer for animations
+  const observerCallback = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+  
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  
+  // Add animation classes to elements
+  document.querySelectorAll('section > *:not(h2)').forEach(element => {
+    element.classList.add('fade-up');
+    observer.observe(element);
+  });
+  
   // Mobile menu toggle
   const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
   const navLinks = document.querySelector('.nav-links');

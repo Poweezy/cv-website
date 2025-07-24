@@ -7,6 +7,30 @@
   <!-- Add Content Security Policy -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; script-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://formspree.io; base-uri 'self';" />
   <title>Siphiwo Nsibande - IT Professional & Full-Stack Developer</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="author" content="Siphiwo Nsibande" />
+  <meta name="keywords" content="IT Professional, Network Technician, Full Stack Developer, Cybersecurity, System Administration" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Siphiwo Nsibande - IT Professional & Full-Stack Developer" />
+  <meta property="og:description" content="Experienced IT Systems and Network Technician with expertise in infrastructure, cybersecurity, and full-stack development." />
+  <meta property="og:image" content="assets/profile-pic.jpg" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Siphiwo Nsibande - Portfolio" />
+  <meta name="twitter:description" content="IT Professional specializing in infrastructure, cybersecurity, and full-stack development." />
+  <meta name="twitter:image" content="assets/profile-pic.jpg" />
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#007bff" />
+  
+  <!-- PWA Support -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <!-- Add Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,10 +50,31 @@
       <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
       <a href="assets/Siphiwo_Resume.pdf" download class="cta-button"><i class="fas fa-download"></i> Download CV</a>
     </div>
-    <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
-      <i class="fas fa-bars"></i>
-    </button>
+    <div class="nav-controls">
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">
+        <i class="fas fa-sun"></i>
+      </button>
+      <div class="theme-picker">
+        <button class="color-option" data-theme="blue" aria-label="Blue theme"></button>
+        <button class="color-option" data-theme="green" aria-label="Green theme"></button>
+        <button class="color-option" data-theme="purple" aria-label="Purple theme"></button>
+        <button class="color-option" data-theme="teal" aria-label="Teal theme"></button>
+      </div>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
   </nav>
+
+  <!-- Project Search -->
+  <div id="projectSearch" class="search-container" style="display: none;">
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" placeholder="Search projects by name or technology..." />
+      <button class="clear-search" aria-label="Clear search">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
 
   <section id="home" class="hero">
     <img src="assets/profile-pic.jpg" alt="Siphiwo Nsibande" loading="lazy" />

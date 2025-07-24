@@ -1,10 +1,45 @@
+/* Theme Colors */
 :root {
+  /* Blue Theme (Default) */
   --primary-color: #007bff;
   --secondary-color: #6c757d;
   --background-color: #f9f9f9;
-  --text-color: #333;
+  --card-bg: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --hover-color: #0056b3;
   --border-radius: 8px;
   --transition: all 0.3s ease;
+  
+  /* Dark Mode Colors */
+  --dark-bg: #1a1a1a;
+  --dark-card-bg: #2d2d2d;
+  --dark-text: #ffffff;
+  --dark-border: #404040;
+}
+
+/* Theme Variations */
+[data-theme="green"] {
+  --primary-color: #28a745;
+  --hover-color: #218838;
+}
+
+[data-theme="purple"] {
+  --primary-color: #6f42c1;
+  --hover-color: #533192;
+}
+
+[data-theme="teal"] {
+  --primary-color: #20c997;
+  --hover-color: #199d76;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --background-color: var(--dark-bg);
+  --card-bg: var(--dark-card-bg);
+  --text-color: var(--dark-text);
+  --border-color: var(--dark-border);
 }
 
 body {
@@ -65,6 +100,59 @@ nav {
   font-size: 1.5rem;
   cursor: pointer;
   color: var(--text-color);
+}
+
+/* Nav Controls */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.icon-button:hover {
+  background-color: var(--border-color);
+}
+
+/* Theme Picker */
+.theme-picker {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.color-option[data-theme="blue"] {
+  background-color: #007bff;
+}
+
+.color-option[data-theme="green"] {
+  background-color: #28a745;
+}
+
+.color-option[data-theme="purple"] {
+  background-color: #6f42c1;
+}
+
+.color-option[data-theme="teal"] {
+  background-color: #20c997;
 }
 
 /* Hero Section */
@@ -460,6 +548,85 @@ section h2 {
   margin-bottom: 1rem;
   border-radius: 4px;
   text-align: center;
+}
+
+/* Search Container */
+.search-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+
+.search-container.active {
+  transform: translateY(0);
+}
+
+.search-wrapper {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.clear-search {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .skill-category,
+[data-theme="dark"] .experience-card,
+[data-theme="dark"] .education-card,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .contact-form {
+  background-color: var(--dark-card-bg);
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] textarea {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-border);
+}
+
+/* Animation Classes */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive Design */
