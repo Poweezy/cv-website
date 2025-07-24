@@ -8,6 +8,24 @@ if ('serviceWorker' in navigator) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Handle splash screen
+  const splashScreen = document.getElementById('splash-screen');
+  if (splashScreen) {
+    // If the user has visited before, remove splash screen immediately
+    if (sessionStorage.getItem('hasVisited')) {
+      splashScreen.style.display = 'none';
+    } else {
+      // First visit - show splash screen with animation
+      setTimeout(() => {
+        splashScreen.classList.add('fade-out');
+        setTimeout(() => {
+          splashScreen.style.display = 'none';
+        }, 500);
+        sessionStorage.setItem('hasVisited', 'true');
+      }, 2000);
+    }
+  }
+
   // Theme management
   const themeToggle = document.getElementById('themeToggle');
   const colorOptions = document.querySelectorAll('.color-option');
