@@ -309,6 +309,7 @@ section h2 {
 }
 
 .form-group {
+  position: relative;
   margin-bottom: 1.5rem;
 }
 
@@ -338,10 +339,34 @@ section h2 {
   align-items: center;
   gap: 0.5rem;
   transition: var(--transition);
+  position: relative;
+  min-width: 150px;
 }
 
 .submit-btn:hover {
   background: #0056b3;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .contact-info {
@@ -368,35 +393,76 @@ section h2 {
   color: var(--primary-color);
 }
 
-/* Footer */
-footer {
-  background: white;
-  padding: 2rem;
-  text-align: center;
-  margin-top: 4rem;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
+/* Thank You Page Styles */
+.thank-you-section {
+  min-height: calc(100vh - 140px);
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
+.thank-you-content {
+  background: white;
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 90%;
 }
 
-.footer-links a {
-  color: var(--text-color);
-  text-decoration: none;
-  transition: var(--transition);
+.thank-you-content i.fa-check-circle {
+  font-size: 4rem;
+  color: #28a745;
+  margin-bottom: 1.5rem;
 }
 
-.footer-links a:hover {
+.thank-you-content h1 {
   color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.thank-you-content p {
+  color: var(--secondary-color);
+  margin-bottom: 2rem;
+}
+
+.redirect-notice {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.redirect-notice p {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+.redirect-notice #countdown {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* Form Error State */
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #dc3545;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.form-error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  text-align: center;
 }
 
 /* Responsive Design */

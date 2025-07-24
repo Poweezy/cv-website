@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Thank you for contacting Siphiwo Nsibande" />
+  <title>Thank You - Message Sent | Siphiwo Nsibande</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <meta http-equiv="refresh" content="5;url=/" /> <!-- Redirect to home after 5 seconds -->
+</head>
+<body>
+  <nav>
+    <div class="logo"><strong>Siphiwo Nsibande</strong></div>
+    <div class="nav-links">
+      <a href="/"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+  </nav>
+
+  <section class="hero thank-you-section">
+    <div class="thank-you-content">
+      <i class="fas fa-check-circle"></i>
+      <h1>Thank You!</h1>
+      <p>Your message has been sent successfully. I'll get back to you as soon as possible.</p>
+      <div class="redirect-notice">
+        <p>You'll be redirected to the homepage in <span id="countdown">5</span> seconds...</p>
+        <a href="/" class="btn">
+          <i class="fas fa-home"></i> Return to Homepage Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2025 Siphiwo Nsibande. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Countdown timer
+    let countdown = 5;
+    const countdownDisplay = document.getElementById('countdown');
+    
+    const timer = setInterval(() => {
+      countdown--;
+      if (countdownDisplay) {
+        countdownDisplay.textContent = countdown;
+      }
+      if (countdown <= 0) {
+        clearInterval(timer);
+        window.location.href = '/';
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
